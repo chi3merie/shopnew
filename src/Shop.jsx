@@ -129,7 +129,7 @@ export default function Shop() {
     <div className="store">
       <div className="announcement">Free shipping on orders over $100 * Discover your next favorite.</div>
       <header className="header">
-        <a className="logo" href="#home">luxe<span>cart.</span></a>
+        <a className="logo" href="#home">Thivine<span>cart.</span></a>
         <nav className="nav-links">
           <a href="#home">Home</a>
           <a href="#shop">Shop</a>
