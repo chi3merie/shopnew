@@ -706,10 +706,19 @@ select:focus-visible {
 
 .product-card {
   min-width: 0;
-  transition: transform 0.3s ease;
+  overflow: hidden;
+  border: 1px solid var(--gold-light);
+  border-radius: 5px;
+  background: var(--white);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
 }
 
 .product-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 10px 24px rgba(35, 45, 35, 0.1);
   transform: translateY(-4px);
 }
 
@@ -774,36 +783,47 @@ select:focus-visible {
 }
 
 .quick-add {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   width: 100%;
-  padding: 14px 10px;
-  border: 0;
-  background: var(--green);
-  color: var(--white);
+  margin-top: 14px;
+  padding: 9px 10px;
+  border: 1px solid #dce8dc;
+  border-radius: 3px;
+  background: #f3f7f2;
+  color: var(--green-dark);
   font-size: 11px;
-  opacity: 0;
-  transform: translateY(100%);
+  font-weight: 600;
   transition:
-    opacity 0.25s ease,
-    transform 0.25s ease,
-    background 0.25s ease;
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .quick-add:hover {
+  border-color: var(--green-dark);
   background: var(--green-dark);
+  color: var(--white);
+  box-shadow: 0 4px 12px rgba(23, 63, 46, 0.16);
 }
 
-.product-card:hover .quick-add,
-.quick-add:focus-visible {
-  opacity: 1;
-  transform: translateY(0);
+.quick-add-icon {
+  width: 19px;
+  height: 19px;
+  display: grid;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
 }
 
 .product-info {
-  padding: 16px 2px 0;
+  padding: 16px 14px 14px;
 }
 
 .product-meta {

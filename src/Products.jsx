@@ -53,12 +53,15 @@ export default function Products({ onAddToCart }) {
           <article className="product-card" key={product.id}>
             <div className="product-image">
               <img src={product.image} alt={product.name} loading="lazy" />
-              <button className="quick-add" onClick={() => onAddToCart(product)}>+ Add to cart</button>
             </div>
             <div className="product-info">
               <div className="product-meta"><span>{product.category}</span><span className="rating">★ 4.8</span></div>
               <h3>{product.name}</h3>
               <div className="price-row"><strong>{product.price}</strong></div>
+              <button className="quick-add" onClick={() => onAddToCart(product)}>
+                <span className="quick-add-icon" aria-hidden="true">+</span>
+                Add to cart
+              </button>
             </div>
           </article>
         ))}
