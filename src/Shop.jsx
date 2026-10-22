@@ -2,6 +2,7 @@
   import "./App.css";
   import { createOrder, startPayment } from "./lib/payments.js";
   import Products from "./Products.jsx";
+import LoadingSpinner from "./LoadingSpinner.jsx";
 
   function formatMoney(amountMinor, currency = "USD") {
     return new Intl.NumberFormat("en-US", {
@@ -258,6 +259,9 @@
                   )}
 
                   <button className="checkout-button" onClick={handlePayment} disabled={payment.status === "processing"}>
+                    {payment.status === "processing" && (
+                      <LoadingSpinner variant="spinner" size="small" label="Processing payment" />
+                    )}
                     {payment.status === "processing" ? "Processing payment…" : `Pay ${formatMoney(checkout.subtotalMinor)}`}
                   </button>
                   <p>You'll complete payment on our secure payment partner.</p>

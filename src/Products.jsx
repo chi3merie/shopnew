@@ -1,3 +1,4 @@
+import { useCallback, useState } from "react";
 import "./App.css";
 import whiteSneakers from "./assets/white.avif";
 import blueSneakers from "./assets/hite.avif";
@@ -16,6 +17,7 @@ import braceletSet from "./assets/racelet.webp";
 import diamondRings from "./assets/jewelry-ring-with-diamonds-and-precious-stones.jpg";
 import goldBraceletSet from "./assets/gold Bracelet.webp";
 import goldRings from "./assets/finger ring.jpg";
+import LoadingSpinner from "./LoadingSpinner.jsx";
 
 const products = [
   { id: 1, name: "Classic White Sneakers", category: "Fashion", price: "$89.99", image: whiteSneakers },
@@ -38,6 +40,21 @@ const products = [
 ];
 
 export default function Products({ onAddToCart }) {
+  const [loadedImages, setLoadedImages] = useState({});
+
+  const markLoaded = useCallback((id) => {
+    setLoadedImages((prev) => (prev[id] ? prev : { ...prev, [id]: true }));
+  }, []);
+
+  // Cached images can finish decoding before React attaches onLoad,
+  // so check `complete` on mount as well.
+  const attachImage = useCallback(
+    (id) => (node) => {
+      if (node && node.complete) markLoaded(id);
+    },
+    [markLoaded]
+  );
+
   return (
     <section className="shop-section" id="shop">
       <div className="section-heading shop-heading">
@@ -52,7 +69,18 @@ export default function Products({ onAddToCart }) {
         {products.map((product) => (
           <article className="product-card" key={product.id}>
             <div className="product-image">
-              <img src={product.image} alt={product.name} loading="lazy" />
+              {!loadedImages[product.id] && (
+                <LoadingSpinner variant="skeleton" label={`Loading ${product.name}`} />
+              )}
+              <img
+                ref={attachImage(product.id)}
+                src={product.image}
+                alt={product.name}
+                loading="lazy"
+                onLoad={() => markLoaded(product.id)}
+                onError={() => markLoaded(product.id)}
+                className={loadedImages[product.id] ? "is-loaded" : "is-loading"}
+              />
             </div>
             <div className="product-info">
               <div className="product-meta"><span>{product.category}</span><span className="rating">★ 4.8</span></div>
