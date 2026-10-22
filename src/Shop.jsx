@@ -105,7 +105,7 @@ import LoadingSpinner from "./LoadingSpinner.jsx";
             <a href="#home">Home</a>
             <a href="#shop">Shop</a>
             <a href="#categories">Categories</a>
-            <a href="/about">About</a>
+            <a href="#about">About</a>
           </nav>
           <div className="header-actions">
             <button className="cart-button" onClick={() => setCartOpen(true)}>
